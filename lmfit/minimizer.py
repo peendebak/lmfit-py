@@ -2413,10 +2413,10 @@ def _nan_policy(arr, nan_policy='raise', handle_inf=True):
 
     if nan_policy == 'raise':
         try:
-            # Calling np.sum to avoid creating a huge array into memory
+            # Calling np.add.reduce to avoid creating a huge array into memory
             # e.g. np.isnan(a).any()
             with np.errstate(invalid='ignore'):
-                contains_nan = handler_func(np.sum(arr))
+                contains_nan = handler_func(np.add.reduce(arr))
         except TypeError:
             # If the check cannot be properly performed we fallback to omitting
             # nan values and raising a warning. This can happen when attempting to
