@@ -2221,7 +2221,7 @@ class Minimizer:
         bounds = np.asarray([(par.min, par.max) for par in
                              self.params.values()])[varying]
 
-        if not np.all(np.isfinite(bounds)):
+        if not np.isfinite(np.sum(bounds)):
             raise ValueError('dual_annealing requires finite bounds for all'
                              ' varying parameters')
         result.call_kws = da_kws

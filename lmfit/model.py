@@ -757,7 +757,7 @@ class Model:
 
         """
         model = self.eval(params, **kwargs)
-        if self.nan_policy == 'raise' and not np.all(np.isfinite(model)):
+        if self.nan_policy == 'raise' and not np.isfinite(np.add.reduce(model)):
             msg = ('The model function generated NaN values and the fit '
                    'aborted! Please check your model function and/or set '
                    'boundaries on parameters where applicable. In cases like '
