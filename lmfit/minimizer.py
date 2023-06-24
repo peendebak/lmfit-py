@@ -364,7 +364,7 @@ class MinimizerResult:
         """Calculate the fitting statistics."""
         self.nvarys = len(self.init_vals)
         if not hasattr(self, 'residual'):
-            self.residual = -np.inf
+            self.residual = np.nan # -np.inf
         if isinstance(self.residual, np.ndarray):
             self.chisqr = (self.residual**2).sum()
             self.ndata = len(self.residual)
@@ -1608,6 +1608,11 @@ class Minimizer:
         if not result.aborted:
             result.nfev -= 1
             result.residual = self.__residual(ret.x, False)
+        else:
+            pass
+            # for an abort we can still report valid statistics https://github.com/lmfit/lmfit-py/discussions/894
+            #result.residual = self.__residual(result.last_internal_values, False)
+
         result._calculate_statistics()
 
         if not result.aborted:
