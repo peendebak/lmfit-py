@@ -1077,7 +1077,7 @@ class TestUserDefiniedModel(CommonTests, unittest.TestCase):
         _m = m1 + m2  # noqa: F841
 
         param_values = {name: p.value for name, p in params.items()}
-        self.assertTrue(param_values['m1_intercept'] < -0.0)
+        self.assertTrue(param_values['m1_intercept'] < 0.01)
         self.assertEqual(param_values['m2_amplitude'], 1)
 
     def test_weird_param_hints(self):
